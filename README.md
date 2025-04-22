@@ -5,7 +5,7 @@ NPM = 23552011228
 
 
 
-##Activity_Main
+## Activity_Main
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-##Error
+## Error
 ![Screenshot (568)](https://github.com/user-attachments/assets/d7a1d149-1f71-4b52-9e27-8ad6d6e6736b)
 
 
