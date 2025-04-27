@@ -29,43 +29,53 @@ NPM = 23552011228
 </LinearLayout>
 
 ## MainActivity
-package com.example.inputalert;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.inputalert
 
-public class MainActivity extends AppCompatActivity {
+import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 
-    EditText editTextInput;
-    Button buttonSubmit;
+class MainActivity : AppCompatActivity() {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    private lateinit var editTextInput: EditText
+    private lateinit var buttonSubmit: Button
 
-        editTextInput = findViewById(R.id.editTextInput);
-        buttonSubmit = findViewById(R.id.buttonSubmit);
-
-        buttonSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String input = editTextInput.getText().toString();
-                showAlert(input);
-            }
-        });
+    companion object {
+        private const val TAG = "MainActivity"
     }
 
-    private void showAlert(String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Inputan Kamu");
-        builder.setMessage(message);
-        builder.setPositiveButton("OK", null);
-        builder.show();
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        editTextInput = findViewById(R.id.editTextInput)
+        buttonSubmit = findViewById(R.id.buttonSubmit)
+
+        buttonSubmit.setOnClickListener {
+            val input = editTextInput.text.toString()
+
+            // Tambahkan Log
+            Log.d(TAG, "User Input: $input")
+
+            // Tambahkan Toast
+            Toast.makeText(this, "Input: $input", Toast.LENGTH_SHORT).show()
+
+            // Tampilkan AlertDialog
+            showAlert(input)
+        }
+    }
+
+    private fun showAlert(message: String) {
+        AlertDialog.Builder(this)
+            .setTitle("Inputan Kamu")
+            .setMessage(message)
+            .setPositiveButton("OK", null)
+            .show()
     }
 }
 
