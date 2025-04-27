@@ -1,4 +1,4 @@
-## LoginApp
+## input native & arlet
 Nama = Adrian Rusmana
 Kelas = TIF-RP23 CNS C
 NPM = 23552011228
@@ -7,74 +7,65 @@ NPM = 23552011228
 
 ## Activity_Main
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center">
+    android:padding="24dp">
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/editTextInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:layout_marginTop="16dp" />
+        android:hint="Masukkan sesuatu" />
 
     <Button
-        android:id="@+id/loginButton"
-        android:layout_width="match_parent"
+        android:id="@+id/buttonSubmit"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:layout_marginTop="24dp" />
+        android:text="Tampilkan Alert"
+        android:layout_marginTop="16dp" />
 </LinearLayout>
 
 ## MainActivity
-package com.example.loginapp;
+package com.example.inputalert;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText usernameField, passwordField;
-    private Button loginButton;
+    EditText editTextInput;
+    Button buttonSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        usernameField = findViewById(R.id.username);
-        passwordField = findViewById(R.id.password);
-        loginButton   = findViewById(R.id.loginButton);
+        editTextInput = findViewById(R.id.editTextInput);
+        buttonSubmit = findViewById(R.id.buttonSubmit);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user = usernameField.getText().toString();
-                String pass = passwordField.getText().toString();
-
-                if (user.equals("admin") && pass.equals("1234")) {
-                    Toast.makeText(MainActivity.this, "Login Berhasil", Toast.LENGTH_SHORT).show();
-                    // Tambahkan intent ke activity berikutnya jika diperlukan
-                } else {
-                    Toast.makeText(MainActivity.this, "Username atau Password salah", Toast.LENGTH_SHORT).show();
-                }
+                String input = editTextInput.getText().toString();
+                showAlert(input);
             }
         });
+    }
+
+    private void showAlert(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Inputan Kamu");
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", null);
+        builder.show();
     }
 }
 
